@@ -1,0 +1,54 @@
+Step 1 - Agent comes up. It looks for ip address. DNS. Hardcoded.
+
+Step 2 - Agent announces itself to core channel. It waits 1 min for
+response. If no response, Agent declares himself the cheese pope and
+initiates the cheese pope protocol. If agent gets response, it syncs
+the block headers.
+
+Step 3 - Agent requests latest timestamp.
+
+Step 4 - Agent synchronizes self to latest timestamp and then begins
+sending off liar requests.
+
+
+
+-----
+
+Timestamp protocol.
+
+Step 1 - Generate two sets of 30 random values, set A and set B. Send
+both sets to the liar channel.
+
+Step 2 - Receive everyone elses liars requests on the same channel.
+
+Step 3 - Sort the requests, process them and rejects the invalid ones.
+
+Step 4 - rebroadcast all validated sets in a consensus broadcast.
+
+Step 5 - Open the new timestamp period with the first value from set A
+(A0). Begin processing transactions in A0. When A0 expires, mark it
+closed and open B0. Begin processing transactions in B0. For X
+seconds, agent may send in laggard transactions on A0. After the
+timeout, A0 is marked closed and the sets contents hashed. The output
+hash is fed into B0 while B0 is still open. When B0 expires, A1 is
+opened and transactions processed against it. B0 is then allowed the
+small grace period for laggards transactions after which it is closed,
+hashed and the results fed into A1. This process is repeated for all
+30 items in both sets.
+
+Step 6 - When the 15th set is processed, a new 30 random values are
+requested for the next period.
+
+
+---
+
+Can we do the same thing with just 2 sets? A0 and B0?
+
+Step 1 - Generate A0 and B0.
+Step 2 - Agree to A0 and B0.
+Step 3 - Create timeStampAgreement and broadcast.
+Step 4 - 
+
+---
+
+Election = 1 Timestamp Block = 1 Liar Block = 60 Timestamps = 60 Lies.

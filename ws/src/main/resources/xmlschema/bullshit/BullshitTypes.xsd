@@ -36,6 +36,7 @@
             <xsd:element name="genesis-block-id" type="xsd:string"/>
             <xsd:element name="previous-block-id" type="xsd:string"/>
             <xsd:element name="this-block-id" type="xsd:string"/>
+            <xsd:element name="liarsElection" type="bs:LiarElectionType"/>
             <xsd:element name="timestampList">
             <xsd:complexType>
                 <xsd:sequence minOccurs="1" maxOccurs="unbounded">
@@ -72,15 +73,31 @@
         <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
-    <!-- A block of lies -->
+    <!-- Use this to allow agents to submit a block of lies all at once -->
+    <xsd:element name="liarsElection" type="bs:LiarElectionType"/>
+    <xsd:complexType name="LiarElectionType">
+        <xsd:sequence>
+            <xsd:element name="hash" type="bs:HashType"/>
+            <xsd:element name="liarList">
+                <xsd:complexType>
+                    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xsd:element name="liarBlock" type="bs:LiarBlockType"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A block of lies chained together -->
     <xsd:element name="LiarBlock" type="bs:LiarBlockType"/>
     <xsd:complexType name="LiarBlockType">
         <xsd:sequence>
+            <xsd:element name="liar-name" type="xsd:string"/>
             <xsd:element name="liarListHash" type="bs:HashType"/>
             <xsd:element name="liarList">
                 <xsd:complexType>
                 <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-                    <xsd:element name="liarLiar" type="bs:LiarType"/>
+                    <xsd:element name="lie" type="bs:LieType"/>
                 </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -88,9 +105,9 @@
     </xsd:complexType>
     
     <!-- A single lie -->
-    <xsd:complexType name="LiarType">
+    <xsd:complexType name="LieType">
     <xsd:sequence minOccurs="1" maxOccurs="1">
-        <xsd:element name="liar-name" type="xsd:string"/>
+        <xsd:element name="for-period" type="xsd:string"/>
         <xsd:element name="random-value" type="xsd:string"/>
     </xsd:sequence>
     </xsd:complexType>
