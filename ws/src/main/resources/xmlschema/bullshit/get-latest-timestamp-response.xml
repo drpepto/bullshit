@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetLatestTimestampResponse xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns="http://os3.cc/bs/1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://os3.cc/bs/1.0 file:./BullshitWS.xsd">
+    <timestamp id="ts_20150824124301">
+        <bs:hash>
+            <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+            <bs:hash-encoding>ASCII</bs:hash-encoding>
+            <bs:input-string>ts_2015082412430170099aec72141d0a5c7a0d324c275ef85e021c4efabaccfabe0ed3e1264ab83f</bs:input-string>
+            <bs:hash>1af9c3338a8ee135dcb90a457591a03520ad208a661fdcefafd6441039e828a7</bs:hash>
+        </bs:hash>
+        <bs:previous-timestamp-id>ORIGIN</bs:previous-timestamp-id>
+        <bs:previous-timestamp-hash>ORIGIN</bs:previous-timestamp-hash>
+        <bs:next-timestamp-id>ts_20150824124302</bs:next-timestamp-id>
+        <bs:Period id="20150824124301">
+            <bs:year>2015</bs:year>
+            <bs:month>8</bs:month>
+            <bs:day>24</bs:day>
+            <bs:hour>12</bs:hour>
+            <bs:minute>43</bs:minute>
+            <bs:second>1</bs:second>
+        </bs:Period>
+        <bs:LiarBlock>
+            <bs:liarListHash>
+                <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                <bs:hash-encoding>ASCII</bs:hash-encoding>
+                <bs:input-string>the-red-dukeFeFiFoFumthe-blue-dukeGive me liberty or give me pizza pie!</bs:input-string>
+                <bs:hash>70099aec72141d0a5c7a0d324c275ef85e021c4efabaccfabe0ed3e1264ab83f</bs:hash>
+            </bs:liarListHash>
+            <bs:liarList>
+                <bs:liarLiar>
+                    <bs:liar-name>the-red-duke</bs:liar-name>
+                    <bs:random-value>FeFiFoFum</bs:random-value>
+                </bs:liarLiar>
+                <bs:liarLiar>
+                    <bs:liar-name>the-blue-duke</bs:liar-name>
+                    <bs:random-value>Give me liberty or give me pizza pie!</bs:random-value>
+                </bs:liarLiar>
+            </bs:liarList>
+        </bs:LiarBlock>
+    </timestamp>
+</GetLatestTimestampResponse>

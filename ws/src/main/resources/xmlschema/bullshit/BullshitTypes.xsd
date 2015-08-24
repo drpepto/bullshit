@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bs="http://os3.cc/bs/types/1.0"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+    targetNamespace="http://os3.cc/bs/types/1.0" elementFormDefault="qualified" vc:minVersion="1.1">
+
+    <!-- Basic unit of time management -->
+    <xsd:element name="Period" type="bs:PeriodType"/>
+    <xsd:complexType name="PeriodType">
+        <xsd:sequence>
+            <xsd:element name="year" type="xsd:int"/>
+            <xsd:element name="month" type="xsd:int"/>
+            <xsd:element name="day" type="xsd:int"/>
+            <xsd:element name="hour" type="xsd:int"/>
+            <xsd:element name="minute" type="xsd:int"/>
+            <xsd:element name="second" type="xsd:int"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- The root block -->
+    <xsd:element name="GenesisBlock" type="bs:GenesisBlockType"/>
+    <xsd:complexType name="GenesisBlockType">
+        <xsd:sequence>
+            <xsd:element name="genesis-block-owner" type="xsd:string"/>
+            <xsd:element ref="bs:Period"/>
+            <xsd:element name="liarBlock" type="bs:LiarBlockType"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- A block of timestamps -->
+    <xsd:element name="timeStampBlock" type="bs:TimestampBlockType"/>
+    <xsd:complexType name="TimestampBlockType">
+        <xsd:sequence>
+            <xsd:element name="block-index" type="xsd:long"/>
+            <xsd:element name="genesis-block-id" type="xsd:string"/>
+            <xsd:element name="previous-block-id" type="xsd:string"/>
+            <xsd:element name="this-block-id" type="xsd:string"/>
+            <xsd:element name="timestampList">
+            <xsd:complexType>
+                <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xsd:element name="timestamp" type="bs:TimeStampSummaryType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+        
+    <!-- A summary of timestamps ids and hashes to make it easy to iterate back and show the block chain is valid -->
+    <xsd:element name="timeStampSummary" type="bs:TimeStampSummaryType"/>
+    <xsd:complexType name="TimeStampSummaryType">
+        <xsd:sequence>
+            <xsd:element name="previous-timestamp-id" type="xsd:string"/>
+            <xsd:element name="previous-timestamp-hash" type="xsd:string"/>
+            <xsd:element name="this-timestamp-id" type="xsd:string"/>
+            <xsd:element name="this-timestamp-hash" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A single timestamp -->
+    <xsd:element name="timeStamp" type="bs:TimeStampType"/>
+    <xsd:complexType name="TimeStampType">
+        <xsd:sequence>
+            <xsd:element name="hash" type="bs:HashType"/>
+            <xsd:element name="previous-timestamp-id" type="xsd:string"/>
+            <xsd:element name="previous-timestamp-hash" type="xsd:string"/>
+            <xsd:element name="next-timestamp-id" type="xsd:string"/>
+            <xsd:element ref="bs:Period"/>
+            <xsd:element ref="bs:LiarBlock"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- A block of lies -->
+    <xsd:element name="LiarBlock" type="bs:LiarBlockType"/>
+    <xsd:complexType name="LiarBlockType">
+        <xsd:sequence>
+            <xsd:element name="liarListHash" type="bs:HashType"/>
+            <xsd:element name="liarList">
+                <xsd:complexType>
+                <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xsd:element name="liarLiar" type="bs:LiarType"/>
+                </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A single lie -->
+    <xsd:complexType name="LiarType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+        <xsd:element name="liar-name" type="xsd:string"/>
+        <xsd:element name="random-value" type="xsd:string"/>
+    </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Informationn on how an input was hashed -->
+    <xsd:element name="Hash" type="bs:HashType"/>
+    <xsd:complexType name="HashType">
+        <xsd:sequence>
+            <xsd:element name="hash-algorithm" type="bs:HashAlgorithmEnum"/>
+            <xsd:element name="hash-encoding" type="bs:EncodingEnum"/>
+            <xsd:element name="input-string" type="xsd:string"/>
+            <xsd:element name="hash" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A list of supported hashing algorithms -->
+    <xsd:simpleType name="HashAlgorithmEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SHA1"/>
+            <xsd:enumeration value="SHA3"/>
+            <xsd:enumeration value="SHA-256"/>
+            <xsd:enumeration value="SHA-512"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <!-- A list of supported string encoding methods -->
+    <xsd:simpleType name="EncodingEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BASE64"/>
+            <xsd:enumeration value="BINARY"/>
+            <xsd:enumeration value="UTF8"/>
+            <xsd:enumeration value="ASCII"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <!-- A list of masks for setting the specificity of periods -->
+    <xsd:simpleType name="PeriodMask">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Y"/>
+            <xsd:enumeration value="YM"/>
+            <xsd:enumeration value="YMD"/>
+            <xsd:enumeration value="YMDH"/>
+            <xsd:enumeration value="YMDHM"/>
+            <xsd:enumeration value="YMDHS"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PostGenesisBlockRequest xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns="http://os3.cc/bs/1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://os3.cc/bs/1.0 file:./BullshitWS.xsd">
+    <genesis-block id="andy_20150824_120101">
+        <bs:genesis-block-owner>andy</bs:genesis-block-owner>
+        
+        <bs:Period id="20150824_120101">
+            <bs:year>2015</bs:year>
+            <bs:month>8</bs:month>
+            <bs:day>24</bs:day>
+            <bs:hour>12</bs:hour>
+            <bs:minute>1</bs:minute>
+            <bs:second>1</bs:second>
+        </bs:Period>
+        
+        <bs:liarBlock>
+            <bs:liarListHash>
+                <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                <bs:hash-encoding>ASCII</bs:hash-encoding>
+                <bs:hash>b5f2f808e3789708b951e3772fa18ee4e971db312f3ebd22a275841dfd51a53d</bs:hash>
+            </bs:liarListHash>
+            <bs:liarList>
+                <bs:liarLiar>
+                    <bs:liar-name>andy</bs:liar-name>
+                    <bs:random-value>wakawaka</bs:random-value>
+                </bs:liarLiar>
+                <bs:liarLiar>
+                    <bs:liar-name>someone-else</bs:liar-name>
+                    <bs:random-value>wajawaja</bs:random-value>
+                </bs:liarLiar>
+            </bs:liarList>
+        </bs:liarBlock>
+    </genesis-block>
+</PostGenesisBlockRequest>

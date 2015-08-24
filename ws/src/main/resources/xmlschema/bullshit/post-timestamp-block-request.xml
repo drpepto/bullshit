@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PostTimestampBlockRequest xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns="http://os3.cc/bs/1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://os3.cc/bs/1.0 file:./BullshitWS.xsd">
+    
+    <timestamp-block id="timestamp-block-0">
+        <bs:liarListHash>
+            <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+            <bs:hash-encoding>BASE64</bs:hash-encoding>
+            <bs:hash>hash0</bs:hash>
+        </bs:liarListHash>
+        
+        <bs:genesis-block-id>ORIGIN</bs:genesis-block-id>
+        <bs:previous-block-id>ORIGIN</bs:previous-block-id>
+        <bs:this-block-id>hash0</bs:this-block-id>
+        <bs:timestampList>
+            <bs:timestamp id="andy_ts_20150101_010101">
+                <bs:Period id="20150101_010101">
+                    <bs:year>2015</bs:year>
+                    <bs:month>1</bs:month>
+                    <bs:day>1</bs:day>
+                    <bs:hour>1</bs:hour>
+                    <bs:minute>1</bs:minute>
+                    <bs:second>1</bs:second>
+                </bs:Period>
+                <bs:LiarBlock>
+                    <bs:liarListHash>
+                        <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                        <bs:hash-encoding>BASE64</bs:hash-encoding>
+                        <bs:hash>hash1</bs:hash>
+                    </bs:liarListHash>
+                    <bs:liarList>
+                        <bs:liarLiar>
+                            <bs:liar-name>liar-name0</bs:liar-name>
+                            <bs:random-value>random-value0</bs:random-value>
+                        </bs:liarLiar>
+                        <bs:liarLiar>
+                            <bs:liar-name>liar-name1</bs:liar-name>
+                            <bs:random-value>random-value1</bs:random-value>
+                        </bs:liarLiar>
+                    </bs:liarList>
+                </bs:LiarBlock>
+            </bs:timestamp>
+            <bs:timestamp id="andy_ts_20150101_010102">
+                <bs:Period id="20150101_010102">
+                    <bs:year>2015</bs:year>
+                    <bs:month>1</bs:month>
+                    <bs:day>1</bs:day>
+                    <bs:hour>1</bs:hour>
+                    <bs:minute>1</bs:minute>
+                    <bs:second>2</bs:second>
+                </bs:Period>
+                <bs:LiarBlock>
+                    <bs:liarListHash>
+                        <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                        <bs:hash-encoding>BASE64</bs:hash-encoding>
+                        <bs:hash>hash2</bs:hash>
+                    </bs:liarListHash>
+                    <bs:liarList>
+                        <bs:liarLiar>
+                            <bs:liar-name>liar-name2</bs:liar-name>
+                            <bs:random-value>random-value2</bs:random-value>
+                        </bs:liarLiar>
+                        <bs:liarLiar>
+                            <bs:liar-name>liar-name3</bs:liar-name>
+                            <bs:random-value>random-value3</bs:random-value>
+                        </bs:liarLiar>
+                    </bs:liarList>
+                </bs:LiarBlock>
+            </bs:timestamp>
+        </bs:timestampList>
+    </timestamp-block>
+</PostTimestampBlockRequest>
