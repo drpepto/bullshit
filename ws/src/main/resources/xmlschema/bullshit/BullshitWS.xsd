@@ -8,14 +8,14 @@
     <xsd:import namespace="http://os3.cc/bs/types/1.0" schemaLocation="./BullshitTypes.xsd"/>
     
     <!-- Initialize a brand new block chain -->
-    <xsd:element name="PostGenesisBlockRequest" type="PostGenesisBlockRequest"/>
-    <xsd:element name="PostGenesisBlockResponse" type="PostGenesisBlockResponse"/>
-    <xsd:complexType name="PostGenesisBlockRequest">
+    <xsd:element name="InitializeGenesisBlockRequest" type="InitializeGenesisBlockRequestType"/>
+    <xsd:element name="InitializeGenesisBlockResponse" type="InitializeGenesisBlockResponseType"/>
+    <xsd:complexType name="InitializeGenesisBlockRequestType">
         <xsd:sequence>
-            <xsd:element name="genesis-block" type="bs:GenesisBlockType"/>
+            <xsd:element name="initial-genesis-block" type="bs:GenesisBlockType"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="PostGenesisBlockResponse">
+    <xsd:complexType name="InitializeGenesisBlockResponseType">
         <xsd:sequence>
             <xsd:element name="transaction-id" type="xsd:string"/>
         </xsd:sequence>
@@ -27,7 +27,7 @@
     <xsd:element name="PostTimestampBlockResponse" type="PostTimestampBlockResponse"/>
     <xsd:complexType name="PostTimestampBlockRequest">
         <xsd:sequence>
-            <xsd:element name="timestamp-block" type="bs:TimestampBlockType"/>
+            <xsd:element name="timestamp-block" type="bs:TimeStampBlockType"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="PostTimestampBlockResponse">

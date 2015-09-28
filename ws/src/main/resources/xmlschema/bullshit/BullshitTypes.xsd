@@ -13,6 +13,7 @@
             <xsd:element name="hour" type="xsd:int"/>
             <xsd:element name="minute" type="xsd:int"/>
             <xsd:element name="second" type="xsd:int"/>
+            <xsd:element name="timezone" type="xsd:string"/>
         </xsd:sequence>
         <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
@@ -21,95 +22,81 @@
     <xsd:element name="GenesisBlock" type="bs:GenesisBlockType"/>
     <xsd:complexType name="GenesisBlockType">
         <xsd:sequence>
-            <xsd:element name="genesis-block-owner" type="xsd:string"/>
-            <xsd:element ref="bs:Period"/>
-            <xsd:element name="liarBlock" type="bs:LiarBlockType"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="block-size" type="bs:PeriodMaskENUM"/>
+            <xsd:element name="period" type="bs:PeriodType"/>
+            <xsd:element name="timestamp-block-list" type="bs:TimeStampBlockType" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
     <!-- A block of timestamps -->
-    <xsd:element name="timeStampBlock" type="bs:TimestampBlockType"/>
-    <xsd:complexType name="TimestampBlockType">
+    <xsd:element name="TimeStampBlock" type="bs:TimeStampBlockType"/>
+    <xsd:complexType name="TimeStampBlockType">
         <xsd:sequence>
-            <xsd:element name="block-index" type="xsd:long"/>
+            <xsd:element name="period" type="xsd:string"/>
             <xsd:element name="genesis-block-id" type="xsd:string"/>
-            <xsd:element name="previous-block-id" type="xsd:string"/>
-            <xsd:element name="this-block-id" type="xsd:string"/>
-            <xsd:element name="liarsElection" type="bs:LiarElectionType"/>
-            <xsd:element name="timestampList">
-            <xsd:complexType>
-                <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-                    <xsd:element name="timestamp" type="bs:TimeStampSummaryType"/>
-                </xsd:sequence>
-            </xsd:complexType>
-            </xsd:element>
+            <xsd:element name="previous-id" type="xsd:string"/>
+            <xsd:element name="liar-election" type="bs:LiarPeriodElectionType"/>
+            <xsd:element name="time-stamp" type="bs:TimeStampType" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
-        
-    <!-- A summary of timestamps ids and hashes to make it easy to iterate back and show the block chain is valid -->
-    <xsd:element name="timeStampSummary" type="bs:TimeStampSummaryType"/>
-    <xsd:complexType name="TimeStampSummaryType">
-        <xsd:sequence>
-            <xsd:element name="previous-timestamp-id" type="xsd:string"/>
-            <xsd:element name="previous-timestamp-hash" type="xsd:string"/>
-            <xsd:element name="this-timestamp-id" type="xsd:string"/>
-            <xsd:element name="this-timestamp-hash" type="xsd:string"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    
+
     <!-- A single timestamp -->
-    <xsd:element name="timeStamp" type="bs:TimeStampType"/>
+    <xsd:element name="TimeStamp" type="bs:TimeStampType"/>
     <xsd:complexType name="TimeStampType">
         <xsd:sequence>
-            <xsd:element name="hash" type="bs:HashType"/>
+            <xsd:element name="period" type="xsd:string"/>
+            <xsd:element name="ts-block-id" type="xsd:string"/>
+            <xsd:element name="hash-of-timestamp" type="bs:HashType"/>
             <xsd:element name="previous-timestamp-id" type="xsd:string"/>
-            <xsd:element name="previous-timestamp-hash" type="xsd:string"/>
-            <xsd:element name="next-timestamp-id" type="xsd:string"/>
-            <xsd:element ref="bs:Period"/>
-            <xsd:element ref="bs:LiarBlock"/>
+            <xsd:element name="vote-xref" type="bs:PeriodVoteXrefType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:element name="PeriodVoteXref" type="bs:PeriodVoteXrefType"/>
+    <xsd:complexType name="PeriodVoteXrefType">
+        <xsd:sequence>
+            <xsd:element name="liar-hash" type="xsd:string"/>
         </xsd:sequence>
         <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
-    <!-- Use this to allow agents to submit a block of lies all at once -->
-    <xsd:element name="liarsElection" type="bs:LiarElectionType"/>
-    <xsd:complexType name="LiarElectionType">
+    
+    <!-- An Election is made up of liars all committing to values
+         ahead of time, sharing them and then hashing them to assure
+         they cannot later chage them -->
+    <xsd:element name="LiarPeriodElection" type="bs:LiarPeriodElectionType"/>
+    <xsd:complexType name="LiarPeriodElectionType">
         <xsd:sequence>
-            <xsd:element name="hash" type="bs:HashType"/>
-            <xsd:element name="liarList">
-                <xsd:complexType>
-                    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-                        <xsd:element name="liarBlock" type="bs:LiarBlockType"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
+          <xsd:element name="name" type="xsd:string"/>
+          <xsd:element name="election-hash" type="bs:HashType"/>
+          <xsd:element name="liar-period-ballot" type="bs:LiarPeriodBallotType" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
-    <!-- A block of lies chained together -->
-    <xsd:element name="LiarBlock" type="bs:LiarBlockType"/>
-    <xsd:complexType name="LiarBlockType">
+    <!-- A ballot of lies where a liar commits to a value ahead of time -->
+    <xsd:element name="LiarPeriodBallot" type="bs:LiarPeriodBallotType"/>
+    <xsd:complexType name="LiarPeriodBallotType">
         <xsd:sequence>
-            <xsd:element name="liar-name" type="xsd:string"/>
-            <xsd:element name="liarListHash" type="bs:HashType"/>
-            <xsd:element name="liarList">
-                <xsd:complexType>
-                <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-                    <xsd:element name="lie" type="bs:LieType"/>
-                </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
+          <xsd:element name="ballot-hash" type="bs:HashType"/>
+          <xsd:element name="liar-name" type="xsd:string"/>
+          <xsd:element name="liar-period-vote" type="bs:LiarPeriodVoteType" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
-    <!-- A single lie -->
-    <xsd:complexType name="LieType">
-    <xsd:sequence minOccurs="1" maxOccurs="1">
-        <xsd:element name="for-period" type="xsd:string"/>
-        <xsd:element name="random-value" type="xsd:string"/>
-    </xsd:sequence>
+    <!-- A liars single vote -->
+    <xsd:complexType name="LiarPeriodVoteType">
+      <xsd:sequence>
+          <xsd:element name="period" type="xsd:string"/>
+        <xsd:element name="vote" type="xsd:string"/>
+      </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
     </xsd:complexType>
     
     <!-- Informationn on how an input was hashed -->
@@ -118,8 +105,7 @@
         <xsd:sequence>
             <xsd:element name="hash-algorithm" type="bs:HashAlgorithmEnum"/>
             <xsd:element name="hash-encoding" type="bs:EncodingEnum"/>
-            <xsd:element name="input-string" type="xsd:string"/>
-            <xsd:element name="hash" type="xsd:string"/>
+            <xsd:element name="output-hash" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
     
@@ -144,14 +130,14 @@
     </xsd:simpleType>
     
     <!-- A list of masks for setting the specificity of periods -->
-    <xsd:simpleType name="PeriodMask">
+    <xsd:simpleType name="PeriodMaskENUM">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="Y"/>
-            <xsd:enumeration value="YM"/>
-            <xsd:enumeration value="YMD"/>
-            <xsd:enumeration value="YMDH"/>
-            <xsd:enumeration value="YMDHM"/>
-            <xsd:enumeration value="YMDHS"/>
+            <xsd:enumeration value="YEARLY"/>
+            <xsd:enumeration value="MONTHLY"/>
+            <xsd:enumeration value="DAILY"/>
+            <xsd:enumeration value="HOURLY"/>
+            <xsd:enumeration value="MINUTELY"/>
+            <xsd:enumeration value="SECONDLY"/>
         </xsd:restriction>
     </xsd:simpleType>
     
