@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:GetTimeStampFromTimeStampBlockResponse xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns:ns0="http://os3.cc/bs/1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://os3.cc/bs/1.0 file:/home/aolsen/sb/bullshit/ws/src/main/resources/xmlschema/bullshit/BullshitWS.xsd">
+
+    <ns0:timestamp-block id="cc/os3/andyverse/timestamp-blocks/29/Sep/2015/13/00">
+        <bs:period>29-Sep-2015_13:00:00_UTC/5</bs:period>
+        
+        <bs:genesis-block-id>genesis-block-id0</bs:genesis-block-id>
+        <bs:previous-id>previous-id0</bs:previous-id>
+        
+        <bs:liar-election id="id1">
+            <bs:name>name0</bs:name>
+            <bs:election-hash>
+                <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                <bs:hash-encoding>BASE64</bs:hash-encoding>
+                <bs:output-hash>output-hash0</bs:output-hash>
+            </bs:election-hash>
+
+            <!-- Ballot for the blue duke -->
+            <bs:liar-period-ballot id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke">
+                <bs:ballot-hash>
+                    <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                    <bs:hash-encoding>BASE64</bs:hash-encoding>
+                    <bs:output-hash>Hash of all vote</bs:output-hash>
+                </bs:ballot-hash>
+                <bs:liar-name>the-blue-duke</bs:liar-name>
+                <bs:liar-period-vote id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke/00">
+                    <bs:period>29-Sep-2015_13:00:00_UTC/6</bs:period>
+                    <bs:vote>Reginald</bs:vote>
+                </bs:liar-period-vote>
+                <bs:liar-period-vote id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke/01">
+                    <bs:period>29-Sep-2015_13:00:01_UTC/6</bs:period>
+                    <bs:vote>Waldo</bs:vote>
+                </bs:liar-period-vote>
+                <bs:liar-period-vote id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke/02">
+                    <bs:period>29-Sep-2015_13:00:02_UTC/6</bs:period>
+                    <bs:vote>Chutney</bs:vote>
+                </bs:liar-period-vote>
+                <!-- cut for other 56 sec cut for brevity -->
+                <bs:liar-period-vote id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke/59">
+                    <bs:period>29-Sep-2015_13:00:59_UTC/6</bs:period>
+                    <bs:vote>Chutney</bs:vote>
+                </bs:liar-period-vote>
+            </bs:liar-period-ballot>
+            
+            <!-- Ballot for the red duke -->
+            <bs:liar-period-ballot id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-red-duke">
+                <bs:ballot-hash>
+                    <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+                    <bs:hash-encoding>BASE64</bs:hash-encoding>
+                    <bs:output-hash>hash of all votes</bs:output-hash>
+                </bs:ballot-hash>
+                <bs:liar-name>the-red-duke</bs:liar-name>
+                <bs:liar-period-vote id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-red-duke/00">
+                    <bs:period>29-Sep-2015_13:00:00_UTC/6</bs:period>
+                    <bs:vote>Whiskey</bs:vote>
+                </bs:liar-period-vote>
+                <bs:liar-period-vote id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-red-duke/01">
+                    <bs:period>29-Sep-2015_13:00:01_UTC/6</bs:period>
+                    <bs:vote>Tango</bs:vote>
+                </bs:liar-period-vote>
+                <bs:liar-period-vote id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-red-duke/02">
+                    <bs:period>29-Sep-2015_13:01:02_UTC/6</bs:period>
+                    <bs:vote>Foxtrot</bs:vote>
+                </bs:liar-period-vote>
+                <!-- cut for other 56 sec cut for brevity -->
+                <bs:liar-period-vote id="cc/os3/andyverse/ballots/timestamp-blocks/29/Sep/2015/13/00/the-red-duke/59">
+                    <bs:period>29-Sep-2015_13:00:59_UTC/6</bs:period>
+                    <bs:vote>Echo</bs:vote>
+                </bs:liar-period-vote>
+            </bs:liar-period-ballot>
+        </bs:liar-election>
+        
+        <bs:timestamp id="cc/os3/andyverse/timestamp-blocks/2015/Sep/29/13/00/00">
+            <bs:this-id>this-id0</bs:this-id>
+            <bs:previous-id>previous-id1</bs:previous-id>
+            <bs:next-id>next-id0</bs:next-id>
+        </bs:timestamp>
+        
+        <bs:timestamp id="cc/os3/andyverse/timestamp-blocks/2015/Sep/29/13/00/01">
+            <bs:this-id>this-id1</bs:this-id>
+            <bs:previous-id>previous-id2</bs:previous-id>
+            <bs:next-id>next-id1</bs:next-id>
+        </bs:timestamp>
+    </ns0:timestamp-block>
+    
+    <ns0:status>
+        <ns0:status>SUCCESS</ns0:status>
+        <ns0:error_id>error_id0</ns0:error_id>
+        <ns0:error_message>error_message0</ns0:error_message>
+        <ns0:stack_trace>stack_trace0</ns0:stack_trace>
+    </ns0:status>
+</ns0:GetTimeStampFromTimeStampBlockResponse>

@@ -7,45 +7,126 @@
     elementFormDefault="qualified" vc:minVersion="1.1">
     <xsd:import namespace="http://os3.cc/bs/types/1.0" schemaLocation="./BullshitTypes.xsd"/>
     
-    <!-- Initialize a brand new block chain -->
+    <!-- Initialize the genesis block of a new timestamp block chain -->
     <xsd:element name="InitializeGenesisBlockRequest" type="InitializeGenesisBlockRequestType"/>
-    <xsd:element name="InitializeGenesisBlockResponse" type="InitializeGenesisBlockResponseType"/>
     <xsd:complexType name="InitializeGenesisBlockRequestType">
         <xsd:sequence>
-            <xsd:element name="initial-genesis-block" type="bs:GenesisBlockType"/>
+            <xsd:element name="initial-genesis-block" type="bs:GenesisBlockType" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
+    
+    <xsd:element name="InitializeGenesisBlockResponse" type="InitializeGenesisBlockResponseType"/>
     <xsd:complexType name="InitializeGenesisBlockResponseType">
         <xsd:sequence>
-            <xsd:element name="transaction-id" type="xsd:string"/>
+            <xsd:element name="genesis-block-id" type="xsd:string"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- Fetch the genesis block with the list of timestamp blocks -->
+    <xsd:element name="GetGenesisBlockRequest" type="GetGenesisBlockRequestType"/>
+    <xsd:complexType name="GetGenesisBlockRequestType">
+        <xsd:sequence>
+            <xsd:element name="genesis-block-id" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GetGenesisBlockResponse" type="GetGenesisBlockResponseType"/>
+    <xsd:complexType name="GetGenesisBlockResponseType">
+        <xsd:sequence>
+            <xsd:element name="genesis-block" type="bs:GenesisBlockType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="status" type="WsStatusType"/>
         </xsd:sequence>
     </xsd:complexType>
     
     
-    <!-- Post the latest Timestamp to the global block chain -->
-    <xsd:element name="PostTimestampBlockRequest" type="PostTimestampBlockRequest"/>
-    <xsd:element name="PostTimestampBlockResponse" type="PostTimestampBlockResponse"/>
-    <xsd:complexType name="PostTimestampBlockRequest">
+    <!-- Fetch the timestamps within a timestamp block -->
+    <xsd:element name="GetTimeStampFromTimeStampBlockRequest" type="GetTimeStampFromTimeStampBlockRequestType"/>
+    <xsd:complexType name="GetTimeStampFromTimeStampBlockRequestType">
         <xsd:sequence>
-            <xsd:element name="timestamp-block" type="bs:TimeStampBlockType"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="PostTimestampBlockResponse">
-        <xsd:sequence>
-            <xsd:element name="transaction-id" type="xsd:string"/>
+            <xsd:element name="timestamp-block-id" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
     
-    <!-- Request the latest official Timestamp -->
-    <xsd:element name="GetLatestTimestampRequest" type="GetLatestTimestampRequest"/>
-    <xsd:element name="GetLatestTimestampResponse" type="GetLatestTimestampResponse"/>
-    <xsd:complexType name="GetLatestTimestampRequest">
-        <xsd:sequence/>
-    </xsd:complexType>
-    <xsd:complexType name="GetLatestTimestampResponse">
+    <xsd:element name="GetTimeStampFromTimeStampBlockResponse" type="GetTimeStampFromTimeStampBlockResponseType"/>
+    <xsd:complexType name="GetTimeStampFromTimeStampBlockResponseType">
         <xsd:sequence>
+            <xsd:element name="timestamp-block" type="bs:TimeStampBlockType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <!-- Add a timestamp block to the genesis block -->
+    <xsd:element name="AddTimeStampBlockToGenesisBlockRequest" type="AddTimeStampBlockToGenesisBlockRequestType"/>
+    <xsd:complexType name="AddTimeStampBlockToGenesisBlockRequestType">
+        <xsd:sequence>
+            <xsd:element name="genesis-block-id" type="xsd:string"></xsd:element>
+            <xsd:element name="timestamp-block" type="bs:TimeStampBlockType" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="AddTimeStampBlockToGenesisBlockResponse" type="AddTimeStampBlockToGenesisBlockResponseType"/>
+    <xsd:complexType name="AddTimeStampBlockToGenesisBlockResponseType">
+        <xsd:sequence>
+            <xsd:element name="timestamp-block-id" type="xsd:string"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <!-- Add a timestamp to a timestamp block -->
+    <xsd:element name="AddTimeStampToTimeStampBlockRequest" type="AddTimeStampToTimeStampBlockRequestType"/>
+    <xsd:complexType name="AddTimeStampToTimeStampBlockRequestType">
+        <xsd:sequence>
+            <xsd:element name="timestamp-block-id" type="xsd:string"/>
             <xsd:element name="timestamp" type="bs:TimeStampType"/>
         </xsd:sequence>
     </xsd:complexType>
+    
+    <xsd:element name="AddTimeStampToTimeStampBlockResponse" type="AddTimeStampToTimeStampBlockResponseType"/>
+    <xsd:complexType name="AddTimeStampToTimeStampBlockResponseType">
+        <xsd:sequence>
+            <xsd:element name="timestamp-id" type="xsd:string"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <!-- Add a transaction to the latest timestamp -->
+    <xsd:element name="AddTransactionToLatestTimeStampRequest" type="AddTransactionToLatestTimeStampType"/>
+    <xsd:complexType name="AddTransactionToLatestTimeStampType">
+        <xsd:sequence>
+            <xsd:element name="transaction" type="bs:TransactionType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="AddTransactionToLatestTimeStampResponse" type="AddTransactionToLatestTimeStampResponseType"/>
+    <xsd:complexType name="AddTransactionToLatestTimeStampResponseType">
+        <xsd:sequence>
+            <xsd:element name="timestamp-id" type="xsd:string"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <!-- Let the caller know the status of the call -->
+    <xsd:complexType name="WsStatusType">
+        <xsd:sequence>
+            <xsd:element name="status" type="WsStatusEnum"/>
+            <xsd:element name="error_id" type="xsd:string"/>
+            <xsd:element name="error_message" type="xsd:string"/>
+            <xsd:element name="stack_trace" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A list of statuses -->
+    <xsd:simpleType name="WsStatusEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SUCCESS"/>
+            <xsd:enumeration value="FAILURE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
     
 </xsd:schema>

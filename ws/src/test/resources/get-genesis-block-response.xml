@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ns0:InitializeGenesisBlockRequest xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
- xmlns:bs="http://os3.cc/bs/types/1.0"
+<ns0:GetGenesisBlockResponse xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
  xmlns:ns0="http://os3.cc/bs/1.0"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://os3.cc/bs/1.0 file:/home/aolsen/sb/bullshit/ws/src/main/resources/xmlschema/bullshit/BullshitWS.xsd">
     
-    <!-- The first and only genesis block for the andyverse time clock -->
-    <ns0:initial-genesis-block id="cc/os3/andyverse">
-        <bs:id>hashofelection</bs:id>
-        <bs:name>Andyverse</bs:name>
-        <bs:description>Welcome to the Andyverse.</bs:description>
+    <ns0:genesis-block id="cc/os3/andyverse">
+        <bs:id>id0</bs:id>
+        <bs:name>AndyVerse</bs:name>
+        <bs:description>Welcome to the Andyverse</bs:description>
         <bs:timestamp-block-size>MINUTE</bs:timestamp-block-size>
-        <bs:epoch>29-Sep-2015_13:00:00_UTC/5</bs:epoch>        
+        
+        <bs:epoch>29-Sep-2015_13:00:00_UTC/5</bs:epoch>
+        
         <bs:liar-block-election id="cc/os3/andyverse/elections/genesis-block">
             <bs:name>Epoch Election</bs:name>
             <bs:election-hash>
@@ -35,5 +36,32 @@
                 <bs:liar-commit>Give me liberty or give me pizza pie!</bs:liar-commit>
             </bs:liar-block-ballot>
         </bs:liar-block-election>
-    </ns0:initial-genesis-block>
-</ns0:InitializeGenesisBlockRequest>
+        
+        <bs:timestamp-block id="cc/os3/andyverse/timestamp-blocks/29/Sep/2015/13/00">
+            <bs:this-id>this-id0</bs:this-id>
+            <bs:previous-id>previous-id0</bs:previous-id>
+            <bs:next-id>next-id0</bs:next-id>
+        </bs:timestamp-block>
+        
+        <bs:timestamp-block id="cc/os3/andyverse/timestamp-blocks/29/Sep/2015/13/01">
+            <bs:this-id>this-id1</bs:this-id>
+            <bs:previous-id>previous-id1</bs:previous-id>
+            <bs:next-id>next-id1</bs:next-id>
+        </bs:timestamp-block>
+        
+        <bs:timestamp-block id="cc/os3/andyverse/timestamp-blocks/29/Sep/2015/13/02">
+            <bs:this-id>this-id1</bs:this-id>
+            <bs:previous-id>previous-id1</bs:previous-id>
+            <bs:next-id>next-id1</bs:next-id>
+        </bs:timestamp-block>
+        
+    </ns0:genesis-block>
+
+    <ns0:status>
+        <ns0:status>SUCCESS</ns0:status>
+        <ns0:error_id>error_id0</ns0:error_id>
+        <ns0:error_message>error_message0</ns0:error_message>
+        <ns0:stack_trace>stack_trace0</ns0:stack_trace>
+    </ns0:status>
+    
+</ns0:GetGenesisBlockResponse>

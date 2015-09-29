@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:AddTimeStampToTimeStampBlockRequest xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:bs="http://os3.cc/bs/types/1.0"
+ xmlns:ns0="http://os3.cc/bs/1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://os3.cc/bs/1.0 file:/home/aolsen/sb/bullshit/ws/src/main/resources/xmlschema/bullshit/BullshitWS.xsd">
+
+ <ns0:timestamp-block-id>cc/os3/andyverse/timestamp-blocks/2015/Sep/29/13</ns0:timestamp-block-id>
+    
+ <ns0:timestamp id="cc/os3/andyverse/timestamp-blocks/2015/Sep/29/13/00/00">
+  <!-- This is the timestamp period -->
+  <bs:period>29-Sep-2015_13:00:00_UTC/6</bs:period>
+
+  <!-- The block it belongs to -->
+  <bs:ts-block-id>cc.os3.andyverse/tsb/2015/Sep/29/13</bs:ts-block-id>
+
+  <!-- A hash of all the votes belonging to this timestamp -->
+  <bs:hash-of-timestamp>
+   <bs:hash-algorithm>SHA1</bs:hash-algorithm>
+   <bs:hash-encoding>BASE64</bs:hash-encoding>
+   <bs:output-hash>output-hash6</bs:output-hash>
+  </bs:hash-of-timestamp>
+
+  <!-- The previous timestamp's id. Used in calculating this id -->
+  <bs:previous-timestamp-id>EPOCH</bs:previous-timestamp-id>
+
+  <!-- Hash all the votes together with the previous id and the timestamp to get the final id -->
+  <bs:vote-xref id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-blue-duke/00">
+   <bs:liar-hash>123456</bs:liar-hash>
+  </bs:vote-xref>
+
+  <bs:vote-xref id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-red-duke/00">
+   <bs:liar-hash>123456</bs:liar-hash>
+  </bs:vote-xref>
+  
+  <bs:vote-xref id="cc/os3/andyverse/votes/timestamp-blocks/29/Sep/2015/13/00/the-green-duke/00">
+   <bs:liar-hash>123456</bs:liar-hash>
+  </bs:vote-xref>
+  </ns0:timestamp>
+    
+</ns0:AddTimeStampToTimeStampBlockRequest>
