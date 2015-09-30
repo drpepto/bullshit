@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:py="http://os3.cc/peepy/types/1.0"
+    xmlns:cp="http://os3.cc/cipher/types/1.0"
+    targetNamespace="http://os3.cc/peepy/types/1.0" elementFormDefault="qualified">
+    
+    <xsd:import namespace="http://os3.cc/cipher/types/1.0" schemaLocation="./CipherTypes.xsd"/>
+
+    <!-- Define the basics for identifying peers -->
+    <xsd:element name="PeerIdentity" type="py:PeerIdentityType"/>
+    <xsd:complexType name="PeerIdentityType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="common-name" type="xsd:string"/>
+            <xsd:element name="legal-name" type="xsd:string"/>
+            <xsd:element name="public-key" type="cp:PublicKeyType"/>
+            <xsd:element name="network-address" type="py:PeerAddressType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- A Peer is any software agent running the peepy software -->
+    <xsd:element name="Peer" type="py:PeerType"/>
+    <xsd:complexType name="PeerType">
+        <xsd:sequence>
+            <xsd:element name="cipher-id" type="xsd:string"/>
+            <xsd:element name="peer-identity" type="py:PeerIdentityType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="web-of-trust" type="py:WebOfTrustContainerType"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- Container to hold web of trust relationships -->
+    <xsd:element name="WebOfTrustContainer" type="py:WebOfTrustContainerType"/>
+    <xsd:complexType name="WebOfTrustContainerType">
+        <xsd:sequence>
+            <xsd:element name="peer-web-of-trust" type="py:PeerWebOfTrustType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- Track Network Addresses -->
+    <xsd:element name="PeerAddress" type="py:PeerAddressType"/>
+    <xsd:complexType name="PeerAddressType">
+        <xsd:sequence>
+            <xsd:element name="peer-id" type="xsd:string"/>
+            <xsd:element name="ipv4" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="ipv6" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- Each peer will know of many other peers. Track these relationships -->
+    <xsd:element name="PeerWebOfTrust" type="py:PeerWebOfTrustType"/>
+    <xsd:complexType name="PeerWebOfTrustType">
+        <xsd:sequence>
+            <xsd:element name="peer1" type="py:PeerIdentityType"/>
+            <xsd:element name="relationship" type="py:PeerRelationshipEnum"/>
+            <xsd:element name="peer2" type="py:PeerIdentityType"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+        
+    <!-- A Snob is the me side in any peer to peer relationship. Unlike every other peer, a peepy manages a private key that must be kept secure to protect his identity. -->
+    <xsd:element name="Snob" type="py:SnobType"/>
+    <xsd:complexType name="SnobType">
+        <xsd:sequence>
+            <xsd:element name="peer" type="py:PeerType"/>
+            <xsd:element name="private-key" type="cp:PrivateKeyType"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+
+    <!-- A Snob may introduce a new new guest into his circle of influence through a letter of introduction -->
+    <xsd:element name="LetterOfIntroduction" type="py:LetterOfIntroductionType"/>
+    <xsd:complexType name="LetterOfIntroductionType">
+        <xsd:sequence>
+            <xsd:element name="introduction" type="py:PeerIntroductionType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+
+    <!-- Host introduces new Peer to Friend -->
+    <xsd:element name="PeerIntroduction" type="py:PeerIntroductionType"/>
+    <xsd:complexType name="PeerIntroductionType">
+        <xsd:sequence>
+            <xsd:element name="introduced-by" type="py:PeerIdentityType"/>
+            <xsd:element name="new-peer" type="py:PeerIdentityType"/>
+            <xsd:element name="level-of-trust" type="py:PeerRelationshipEnum"/>
+            <xsd:element name="introduced-to" type="py:PeerIdentityType"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+
+    <!-- A Snob may introduce a new new guest into his circle of influence through a letter of introduction -->
+    <xsd:element name="Gossip" type="py:GossipType"/>
+    <xsd:complexType name="GossipType">
+        <xsd:sequence>
+            <xsd:element name="sent-from" type="py:PeerIdentityType"/>
+            <xsd:element name="sent-to" type="py:PeerIdentityType"/>
+            <xsd:element name="gossip" type="py:PeerGossipType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+
+    <!-- Host introduces new Peer to Friend -->
+    <xsd:element name="PeerGossip" type="py:PeerGossipType"/>
+    <xsd:complexType name="PeerGossipType">
+        <xsd:sequence>
+            <xsd:element name="so-and-so" type="py:PeerIdentityType"/>
+            <xsd:element name="is-a" type="py:PeerRelationshipEnum"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    
+    <!-- Peer relationship enums-->
+    <xsd:simpleType name="PeerRelationshipEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="UNKNOWN_PEER"/>
+            <xsd:enumeration value="UNSTABLE_PEER"/>
+            <xsd:enumeration value="OFLINE_PEER"/>
+            <xsd:enumeration value="RELIABLE_PEER"/>
+            <xsd:enumeration value="LYING_PEER"/>
+            <xsd:enumeration value="SWINDLING_PEER"/>
+            <xsd:enumeration value="SLOW_RESPONDING_PEER"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

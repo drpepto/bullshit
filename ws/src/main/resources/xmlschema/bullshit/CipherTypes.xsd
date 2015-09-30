@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:cp="http://os3.cc/cipher/types/1.0"
+    targetNamespace="http://os3.cc/cipher/types/1.0" elementFormDefault="qualified">
+    
+    <!-- Define a public key -->
+    <xsd:element name="PublicKey" type="cp:PublicKeyType"/>
+    <xsd:complexType name="PublicKeyType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- Define a private key -->
+    <xsd:element name="PrivateKey" type="cp:PrivateKeyType"/>
+    <xsd:complexType name="PrivateKeyType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    <!-- Define a digital signature -->
+    <xsd:element name="DigitalSignature" type="cp:DigitalSignatureType"/>
+    <xsd:complexType name="DigitalSignatureType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="xsd:string"/>
+    </xsd:complexType>
+    
+    
+</xsd:schema>

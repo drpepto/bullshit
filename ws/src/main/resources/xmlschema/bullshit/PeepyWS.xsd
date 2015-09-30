@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns="http://os3.cc/peepy/1.0"
+    xmlns:pp="http://os3.cc/peepy/types/1.0"
+    targetNamespace="http://os3.cc/peepy/1.0" elementFormDefault="qualified"> 
+    
+    <xsd:import namespace="http://os3.cc/peepy/types/1.0" schemaLocation="./PeepyTypes.xsd"/>
+    
+    <!-- Register a peer -->
+    <xsd:element name="RegisterPeerRequest" type="RegisterPeerRequestType"/>
+    <xsd:complexType name="RegisterPeerRequestType">
+        <xsd:sequence>
+            <xsd:element name="peer" type="pp:PeerIdentityType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="RegisterPeerResponse" type="RegisterPeerResponseType"/>
+    <xsd:complexType name="RegisterPeerResponseType">
+        <xsd:sequence>
+            <xsd:element name="peer-id" type="xsd:string"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <!-- Request a letter of introduction into polite society -->
+    <xsd:element name="LetterOfIntroductionRequest" type="LetterOfIntroductionRequestType"/>
+    <xsd:complexType name="LetterOfIntroductionRequestType">
+        <xsd:sequence>
+            <xsd:element name="peer-id" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="LetterOfIntroductionResponse" type="LetterOfIntroductionResponseType"/>
+    <xsd:complexType name="LetterOfIntroductionResponseType">
+        <xsd:sequence>
+            <xsd:element name="letter-of-introduction" type="pp:LetterOfIntroductionType"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <!-- Peers gossip about each other by providing each other with dirt on other peers -->
+    <xsd:element name="GossipRequest" type="GossipRequestType"/>
+    <xsd:complexType name="GossipRequestType">
+        <xsd:sequence>
+            <xsd:element name="gossip" type="pp:GossipType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="GossipResponse" type="GossipResponseType"/>
+    <xsd:complexType name="GossipResponseType">
+        <xsd:sequence>
+            <xsd:element name="gossip" type="pp:GossipType"/>
+            <xsd:element name="status" type="WsStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <!-- Let the caller know the status of the call -->
+    <xsd:complexType name="WsStatusType">
+        <xsd:sequence>
+            <xsd:element name="status" type="WsStatusEnum"/>
+            <xsd:element name="error_id" type="xsd:string"/>
+            <xsd:element name="error_message" type="xsd:string"/>
+            <xsd:element name="stack_trace" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- A list of statuses -->
+    <xsd:simpleType name="WsStatusEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SUCCESS"/>
+            <xsd:enumeration value="FAILURE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>
